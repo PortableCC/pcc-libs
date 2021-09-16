@@ -23,6 +23,7 @@ asm(	"	.section .ctors\n"
 #else
 	"	.long 0\n"
 #endif
+	"	.previous\n"
 );
 
 asm(	"	.section .dtors\n"
@@ -31,6 +32,7 @@ asm(	"	.section .dtors\n"
 #else
 	"	.long 0\n"
 #endif
+	"	.previous\n"
 );
 
 IDENT("$Id$");

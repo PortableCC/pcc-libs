@@ -25,12 +25,11 @@ int NXArgc;
 char **NXArgv;
 
 asm(
-#ifdef DYNAMIC
 	"	.text\n"
+#ifdef DYNAMIC
 	"	.symbol_stub\n"
 	"	.picsymbol_stub\n"
 #endif
-	"	.text\n"
 	"	.globl start\n"
 	"	.globl _start\n"
 	"	.p2align 2\n"

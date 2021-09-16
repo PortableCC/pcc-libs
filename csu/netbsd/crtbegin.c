@@ -45,7 +45,10 @@ asm(	"	.section .ctors\n"
 #else
 	"	.long -1\n"
 #endif
-	"	.section .dtors\n"
+	"	.previous\n"
+);
+
+asm(	"	.section .dtors\n"
 	"	.align 2\n"
 	"__DTOR_LIST__:\n"
 #if defined(__x86_64__) || (__sparc64__)
@@ -53,6 +56,7 @@ asm(	"	.section .ctors\n"
 #else
 	"	.long -1\n"
 #endif
+	"	.previous\n"
 );
 
 static void

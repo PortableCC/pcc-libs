@@ -48,7 +48,10 @@ asm(	"	.section .ctors,\"aw\",@progbits\n"
 #else
 	"	.long -1\n"
 #endif
-	"	.section .dtors,\"aw\",@progbits\n"
+	"	.previous\n"
+);
+
+asm(	"	.section .dtors,\"aw\",@progbits\n"
 	"	.align 4\n"
 	"__DTOR_LIST__:\n"
 #ifdef __x86_64__
@@ -56,6 +59,7 @@ asm(	"	.section .ctors,\"aw\",@progbits\n"
 #else
 	"	.long -1\n"
 #endif
+	"	.previous\n"
 );
 
 
