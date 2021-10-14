@@ -37,8 +37,8 @@
 extern void (*__CTOR_LIST__[1])(void);
 extern void (*__DTOR_LIST__[1])(void);
 
-asm(	"	.section .ctors\n"
-	"	.align 2\n"
+asm(	"	.section .ctors,\"aw\",@progbits\n"
+	"	.align 4\n"
 	"__CTOR_LIST__:\n"
 #if defined(__x86_64__) || (__sparc64__)
 	"	.quad -1\n"
@@ -48,8 +48,8 @@ asm(	"	.section .ctors\n"
 	"	.previous\n"
 );
 
-asm(	"	.section .dtors\n"
-	"	.align 2\n"
+asm(	"	.section .dtors,\"aw\",@progbits\n"
+	"	.align 4\n"
 	"__DTOR_LIST__:\n"
 #if defined(__x86_64__) || (__sparc64__)
 	"	.quad -1\n"
