@@ -12,6 +12,7 @@ exec_prefix = @exec_prefix@
 libdir = @libdir@
 
 CC = @CC@
+AS = @AS@
 TARGMACH = @targmach@
 TARGOS = @targos@
 TARGET = @target@
@@ -39,6 +40,8 @@ OBJS =		cmpdi2.o divdi3.o fixdfdi.o fixsfdi.o fixunsdfdi.o \
 		ashldi3.o ashrdi3.o lshrdi3.o \
 		_alloca.o unwind.o \
 		ssp.o signbit.o
+
+-include arch/$(TARGMACH)/Makefile.sub
 
 DEST = libpcc.a
 
