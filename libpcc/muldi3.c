@@ -93,7 +93,7 @@
  * of 2^n in either one will also vanish.  Only `low' need be computed
  * mod 2^2n, and only because of the final term above.
  */
-static quad_t __lmulq(unsigned int, unsigned int);
+quad_t __lmulq(unsigned int, unsigned int);
 
 quad_t
 __muldi3(quad_t a, quad_t b)
@@ -179,7 +179,7 @@ __muldi3(quad_t a, quad_t b)
  *
  * splits into high and low ints as HHALF(l) and LHUP(l) respectively.
  */
-static quad_t
+quad_t
 __lmulq(unsigned int u, unsigned int v)
 {
 	unsigned int u1, u0, v1, v0, udiff, vdiff, high, mid, low;

@@ -4,7 +4,7 @@ VERSION ?= 1.1.0
 PCCLIBDIR ?= /usr/local/lib/pcc/$(TARGET)/$(VERSION)/lib
 SRCDIR ?= .
 
-CFLAGS = -I$(SRCDIR)/$(MACH) -I$(SRCDIR) -Wall -Wstrict-prototypes -Wmissing-prototypes
+CFLAGS += -I$(SRCDIR)/$(MACH) -I$(SRCDIR) -Wall -Wstrict-prototypes -Wmissing-prototypes
 
 OBJS = crt0.o crt1.o crti.o crtn.o crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o crtendT.o
 

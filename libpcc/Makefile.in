@@ -13,6 +13,10 @@ libdir = @libdir@
 
 CC = @CC@
 AS = @AS@
+AR = @AR@
+RANLIB = @RANLIB@
+INSTALL = @INSTALL@
+
 TARGMACH = @targmach@
 TARGOS = @targos@
 TARGET = @target@
@@ -20,13 +24,11 @@ VERSION = @version@
 PCCLIBDIR = $(libdir)/pcc/$(TARGET)/$(VERSION)/lib
 PCCINCDIR = $(libdir)/pcc/$(TARGET)/$(VERSION)/include
 
-CPPFLAGS = @CPPFLAGS@ -I$(srcdir) @ENDIAN_FLAG@ -Dos_$(TARGOS) \
+CFLAGS += @CFLAGS@
+CPPFLAGS += @CPPFLAGS@ -I$(srcdir) @ENDIAN_FLAG@ -Dos_$(TARGOS) \
 	-Dmach_$(TARGMACH) -isystem $(top_srcdir)/libpcc/include
 
 LIBS = @LIBS@
-AR = @AR@
-RANLIB = @RANLIB@
-INSTALL = @INSTALL@
 
 HEADERS =	float.h limits.h stdarg.h stdbool.h stddef.h \
 		iso646.h \

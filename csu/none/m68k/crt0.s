@@ -80,14 +80,13 @@ _vtable:
 	.long	_exception	| 47: trap 15
 	| This is the end of the useful part of the table.
 
-	.section .text
-
 _default_handler:
 	rte
 
 _exception:
 	bra	.
 
+	.section .text
 _start:
  	move.l	#__bss_start,%a0
 	move.l	#__bss_end,%a1

@@ -17,7 +17,8 @@ TARGMACH = @targmach@
 VERSION = @version@
 PCCLIBDIR = $(libdir)/pcc/$(TARGET)/$(VERSION)/lib
 
-CPPFLAGS = @CPPFLAGS@ -DSOFTFLOAT_FOR_GCC -I$(srcdir) \
+CFLAGS += @CFLAGS@
+CPPFLAGS += @CPPFLAGS@ -DSOFTFLOAT_FOR_GCC -I$(srcdir) \
 	-I$(srcdir)/arch/$(TARGMACH) \
 	-isystem $(top_srcdir)/libpcc/include
 
