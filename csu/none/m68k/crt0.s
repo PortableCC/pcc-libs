@@ -18,6 +18,7 @@
 
 	.extern	__bss_start
 	.extern	__bss_end
+	.extern __bss_size
 	.extern	__stack_top
 	.extern _init
 	.extern _fini
@@ -90,8 +91,8 @@ _exception:
 _start:
  	move.l	#__bss_start,%a0
 	move.l	#__bss_end,%a1
-	move.l	%a1,%d1
-	sub.l	%a0,%d1
+	move.l	#__bss_size,%d1
+	tst.l	%d1
 	beq	2f
 	clr.l 	%d0
 1:	move.l	%d0,(%a0)+
