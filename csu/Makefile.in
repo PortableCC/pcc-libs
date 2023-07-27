@@ -29,4 +29,4 @@ all clean install:
 	fi
 
 distclean: clean
-	$(RM) -f Makefile
+	/bin/rm -f Makefile
