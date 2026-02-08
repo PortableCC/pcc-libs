@@ -37,7 +37,7 @@ HEADERS =	float.h limits.h stdarg.h stdbool.h stddef.h \
 
 OBJS =		cmpdi2.o divdi3.o fixdfdi.o fixsfdi.o fixunsdfdi.o \
 		fixunssfdi.o floatdidf.o floatdisf.o floatunsdidf.o \
-		moddi3.o muldi3.o negdi2.o qdivrem.o \
+		isinf_sign.o moddi3.o muldi3.o negdi2.o qdivrem.o \
 		ucmpdi2.o udivdi3.o umoddi3.o cxmuldiv.o \
 		ashldi3.o ashrdi3.o lshrdi3.o \
 		_alloca.o unwind.o \
