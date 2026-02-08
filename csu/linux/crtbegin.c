@@ -34,6 +34,8 @@
 
 #include "common.h"
 
+void *__dso_handle __attribute__ ((__visibility__ ("hidden")));
+
 void __do_global_ctors_aux(void);
 void __do_global_dtors_aux(void);
 
