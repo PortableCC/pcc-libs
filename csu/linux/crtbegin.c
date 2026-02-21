@@ -45,7 +45,7 @@ extern void (*__DTOR_LIST__[1])(void);
 asm(	"	.section .ctors,\"aw\",@progbits\n"
 	"	.align 4\n"
 	"__CTOR_LIST__:\n"
-#ifdef __x86_64__
+#if defined(__x86_64__) || defined(__aarch64__)
 	"	.quad -1\n"
 #else
 	"	.long -1\n"
@@ -56,7 +56,7 @@ asm(	"	.section .ctors,\"aw\",@progbits\n"
 asm(	"	.section .dtors,\"aw\",@progbits\n"
 	"	.align 4\n"
 	"__DTOR_LIST__:\n"
-#ifdef __x86_64__
+#if defined(__x86_64__) || defined(__aarch64__)
 	"	.quad -1\n"
 #else
 	"	.long -1\n"
