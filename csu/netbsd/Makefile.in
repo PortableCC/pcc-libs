@@ -1,0 +1,33 @@
+MACH ?=	i386
+TARGET ?= $(MACH)-netbsd
+VERSION ?= 1.1.0
+
+srcdir = @srcdir@
+libdir = @libdir@
+
+PCCLIBDIR ?= $(libdir}/pcc/$(TARGET)/$(VERSION)/lib
+
+WFLAGS ?= -Wall -Wstrict-prototypes -Wmissing-prototypes
+CPPFLAGS += -I$(srcdir)/$(MACH) -I$(srcdir) @CPPFLAGS@
+CFLAGS += $(WFLAGS) @CFLAGS@
+
+OBJS = crtbegin.o crtend.o
+
+CC = @CC@
+AS = @AS@
+INSTALL = @INSTALL@
+
+all:	$(OBJS)
+
+crtbegin.o: crtbegin.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtend.o: crtend.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+install:
+	mkdir -p $(DESTDIR)$(PCCLIBDIR)
+	$(INSTALL) -m 644 $(OBJS) $(DESTDIR)$(PCCLIBDIR)
+
+clean:
+	rm -f $(OBJS)

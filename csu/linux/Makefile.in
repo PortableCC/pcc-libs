@@ -1,0 +1,62 @@
+MACH ?=	i386
+TARGET ?= $(MACH)-linux
+VERSION ?= 1.1.0
+
+srcdir = @srcdir@
+libdir = @libdir@
+
+PCCLIBDIR ?= $(libdir}/pcc/$(TARGET)/$(VERSION)/lib
+
+WFLAGS ?= -Wall -Wstrict-prototypes -Wmissing-prototypes
+CPPFLAGS += -I$(srcdir)/$(MACH) -I$(srcdir) @CPPFLAGS@
+CFLAGS += $(WFLAGS) @CFLAGS@
+
+#OBJS = crt0.o crt1.o gcrt1.o crti.o crtn.o crtbegin.o crtend.o \
+#	crtbeginS.o crtendS.o crtbeginT.o crtendT.o
+OBJS = crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o crtendT.o
+
+CC = @CC@
+AS = @AS@
+INSTALL = @INSTALL@
+
+all:	$(OBJS)
+
+crt0.o:	$(MACH)/crt0.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crt1.o:	$(MACH)/crt0.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+gcrt1.o: $(MACH)/crt0.c
+	$(CC) -DPROFILE $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crti.o: $(MACH)/crti.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtn.o: $(MACH)/crtn.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtbegin.o: crtbegin.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtend.o: crtend.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtbeginS.o: crtbegin.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fpic -c -o $@ $<
+
+crtendS.o: crtend.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fpic -c -o $@ $<
+
+crtbeginT.o: crtbegin.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+crtendT.o: crtend.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+install:
+	mkdir -p ${DESTDIR}$(PCCLIBDIR)
+	$(INSTALL) -m 644 $(OBJS) ${DESTDIR}$(PCCLIBDIR)
+
+clean:
+	rm -f $(OBJS)

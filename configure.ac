@@ -159,6 +159,7 @@ fi
 AC_CHECK_TOOLS([CC], [pcc gcc cc])
 AC_CHECK_TOOL([AR], [ar], [ar])
 AC_CHECK_TOOL([AS], [as], [as])
+AC_CHECK_TOOLS([LD], [ld], [ld])
 AC_PROG_RANLIB
 
 AC_SUBST(targos)
@@ -169,10 +170,17 @@ AC_SUBST(libdir)
 AC_SUBST(includedir)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(CFLAGS)
+AC_SUBST(LD)
 
 AC_CONFIG_FILES([Makefile
 	csu/Makefile
 	libsoftfloat/Makefile
 	libpcc/Makefile
+	csu/darwin/Makefile
+	csu/linux/Makefile
+	csu/netbsd/Makefile
+	csu/none/Makefile
+	libF77/Makefile
+	libI77/Makefile
 ])
 AC_OUTPUT

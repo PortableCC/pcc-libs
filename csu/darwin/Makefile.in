@@ -1,0 +1,39 @@
+MACH ?= powerpc
+TARGET ?= $(MACH)-darwin
+VERSION ?= 1.1.0
+
+srcdir = @srcdir@
+libdir = @libdir@
+
+PCCLIBDIR ?= $(libdir}/pcc/$(TARGET)/$(VERSION)/lib
+
+WFLAGS ?= -Wall -Wstrict-prototypes -Wmissing-prototypes
+CPPFLAGS += -I$(srcdir)/$(MACH) -I$(srcdir) @CPPFLAGS@
+CFLAGS += $(WFLAGS) @CFLAGS@
+
+OBJS = crt0.o crt1.o gcrt1.o dylib1.o
+
+CC = @CC@
+AS = @AS@
+INSTALL = @INSTALL@
+
+all:	$(OBJS)
+
+crt0.o:	$(MACH)/crt0.c
+	$(CC) -r -static -nostdlib -Wl,-keep_private_externs -Wl,-weak_reference_mismatches,non-weak -DCRT $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+crt1.o:	$(MACH)/crt0.c
+	$(CC) -r -nostdlib -Wl,-keep_private_externs -Wl,-weak_reference_mismatches,non-weak -DCRT -DDYNAMIC $(CPPFLAGS) $(CFLAGS) -o $@ $< /usr/lib/dyld
+
+gcrt1.o: $(MACH)/crt0.c
+	$(CC) -r -nostdlib -Wl,-keep_private_externs -Wl,-weak_reference_mismatches,non-weak -DCRT -DDYNAMIC -DPROFILE $(CPPFLAGS) $(CFLAGS) -o $@ $< /usr/lib/dyld
+
+dylib1.o: $(MACH)/dylib1.c
+	$(CC) -r -nostdlib -Wl,-keep_private_externs -Wl,-weak_reference_mismatches,non-weak -DDYNAMIC $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+install:
+	mkdir -p ${DESTDIR}$(PCCLIBDIR)
+	$(INSTALL) -m 644 $(OBJS) ${DESTDIR}$(PCCLIBDIR)
+
+clean:
+	rm -f $(OBJS)

@@ -1,10 +1,15 @@
 # compile, then strip unnecessary symbols
 
-CFLAGS=-Wall -Werror -Wstrict-prototypes -Wmissing-prototypes
+WFLAGS   ?= -Wall -Werror -Wstrict-prototypes -Wmissing-prototypes
+CPPFLAGS  = @CPPFLAGS@
+CFLAGS    = $(WFLAGS) @CFLAGS@
+CC        = @CC@
+LD        = @LD@
+AR        = @AR@
 
 .c.o :
-	cc -O $(CFLAGS) -c $<
-	-ld -r -x $*.o
+	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) -c $<
+	-$(LD) -r -x $*.o
 	mv a.out $*.o
 
 MISC =	main.o s_rnge.o abort_.o getarg_.o iargc_.o signal_.o s_stop.o s_paus.o
@@ -26,7 +31,7 @@ CMP =	l_ge.o l_gt.o l_le.o l_lt.o hl_ge.o hl_gt.o hl_le.o hl_lt.o
 CHAR =	s_cat.o s_cmp.o s_copy.o 
 
 libF77.a : $(MISC) $(POW) $(CX) $(DCX) $(REAL) $(DBL) $(INT) $(HALF) $(CMP) $(CHAR) cabs.o
-	ar r libF77.a $?
+	$(AR) r libF77.a $?
 
 clean distclean:
 	rm -f $(MISC) $(POW) $(CX) $(DCX) $(REAL) $(DBL) $(INT) $(HALF) \
