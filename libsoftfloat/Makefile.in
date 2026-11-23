@@ -43,10 +43,10 @@ $(DEST): $(OBJS)
 	$(RANLIB) $@
 
 softfloat.o : bits64/softfloat.c
-	$(CC) -O $(CPPFLAGS) $(CFLAGS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
 
 .c.o :
-	$(CC) -O $(CPPFLAGS) $(CFLAGS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
 
 install:
 	test -z "${DESTDIR}$(PCCLIBDIR)" || mkdir -p "${DESTDIR}$(PCCLIBDIR)"

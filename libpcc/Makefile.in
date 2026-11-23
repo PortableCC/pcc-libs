@@ -54,7 +54,7 @@ $(DEST): $(OBJS)
 	$(RANLIB) $@
 
 .c.o :
-	$(CC) -O $(CPPFLAGS) $(CFLAGS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
 
 install: install-headers install-lib
 
