@@ -11,10 +11,10 @@ OBJS = crtbegin.o crtend.o
 all:	$(OBJS)
 
 crtbegin.o: crtbegin.c
-	$(CC) -O $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -O -c -o $@ $<
 
 crtend.o: crtend.c
-	$(CC) -O $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -O -c -o $@ $<
 
 install:
 	mkdir -p $(DESTDIR)$(PCCLIBDIR)
