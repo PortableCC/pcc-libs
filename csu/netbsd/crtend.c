@@ -17,7 +17,7 @@
 
 #include "common.h"
 
-asm(	"	.section .ctors,\"aw\",@progbits\n"
+asm(	"	.section .ctors,\"aw\"\n"
 #if defined(__x86_64__) || defined(__sparc64__)
 	"	.quad 0\n"
 #else
@@ -26,7 +26,7 @@ asm(	"	.section .ctors,\"aw\",@progbits\n"
 	"	.previous\n"
 );
 
-asm(	"	.section .dtors,\"aw\",@progbits\n"
+asm(	"	.section .dtors,\"aw\"\n"
 #if defined(__x86_64__) || defined(__sparc64__)
 	"	.quad 0\n"
 #else
